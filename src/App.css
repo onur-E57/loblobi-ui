@@ -97,10 +97,37 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.logo {
+/* --- LOGO ALANI --- */
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.logo-container:hover {
+  transform: scale(1.02);
+}
+
+.logo-img {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); 
+}
+
+.logo-text {
   color: #38b2ac;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: bold;
   letter-spacing: 1px;
+  font-family: inherit; 
+}
+
+.logo-icon {
+  color: #40d9d1;
 }
 
 .nav-right {
@@ -145,21 +172,64 @@
   border: 1px dashed #4a5568;
 }
 
-.upload-btn-large {
-  background-color: #38b2ac;
+.upload-btn-animated {
+  background-color: #226a66;
   color: white;
   border: none;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  font-weight: bold;
+  width: 240px; 
+  height: 55px;
   border-radius: 50px;
   cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  
+  position: relative; /* İçindekileri buna göre konumlayacağız */
+  overflow: hidden;
+  transition: background-color 0.3s, transform 0.2s;
   box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-  transition: transform 0.2s;
 }
 
-.upload-btn-large:hover {
-  transform: scale(1.05);
+.upload-btn-animated:hover {
+  background-color: #1c5956; /* Hover rengi */
+  transform: translateY(-2px); /* Hafif yukarı kalkma */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+.btn-text {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Ortalamak için */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Animasyon Ayarı */
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-icon {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Animasyon Ayarı */
+  transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.upload-btn-animated:hover .btn-text {
+  transform: translateY(150%);
+}
+
+/* Mouse üzerine gelince Simge alttan ortaya gelsin */
+.upload-btn-animated:hover .btn-icon {
+  top: 0;
 }
 
 .info-text {
@@ -186,11 +256,45 @@
   background-color: #2d3748;
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.2s;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;  
+  cursor: pointer;
+  border: 1px solid transparent;
 }
 
 .video-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+  border-color: #4a5568;
+}
+
+.video-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  
+  background: linear-gradient(
+    to right, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent
+  );
+  
+  transform: skewX(-25deg);
+  z-index: 1;
+}
+
+.video-card:hover::before {
+  animation: shine 0.30s; 
+}
+
+@keyframes shine {
+  100% {
+    left: 125%;
+  }
 }
 
 .video-thumbnail {

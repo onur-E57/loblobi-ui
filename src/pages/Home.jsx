@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import UploadModal from "../components/UploadModal";
+import logoImg from "../assets/loblobi-logo.jpeg";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -29,7 +30,13 @@ const Home = () => {
     <div className="home-container">
       {/* Üst Menü (Navbar) */}
       <nav className="navbar">
-        <h1 className="logo">Loblobi ▶</h1>
+        <div 
+            className="logo-container"
+            onClick={() => navigate("/home")}
+        >
+            <img className="logo-img" src={logoImg} alt="Loblobi Logo" />
+            <h1 className="logo-text">Loblobi <span className="logo-icon">▶</span></h1>
+        </div>
         <div className="nav-right">
           <span className="welcome-text">Hoş geldin, <strong>{user?.username}</strong></span>
           <button onClick={handleLogout} className="logout-btn">Çıkış Yap</button>
@@ -41,12 +48,13 @@ const Home = () => {
         
         {/* Video Yükleme Alanı */}
         <div className="action-area">
-            <button 
-                className="upload-btn-large"
-                onClick={() => setIsModalOpen(true)}
-            >
-                + Video Yükle
-            </button>
+        <button 
+            className="upload-btn-animated"
+            onClick={() => setIsModalOpen(true)}
+        >
+            <span className="btn-text">+ Video Yükle</span>
+            <span className="btn-icon">🚀</span>
+        </button>
             <p className="info-text">Videolarınızı yükleyin ve bombofellerle paylaşın.</p>
         </div>
 
